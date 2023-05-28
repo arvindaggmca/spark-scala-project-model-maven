@@ -13,6 +13,9 @@ object SampleApp {
     println("APP Name :"+spark.sparkContext.appName);
     println("Deploy Mode :"+spark.sparkContext.deployMode);
     println("Master :"+spark.sparkContext.master);
+    val rdd=spark.read.textFile("hello.txt")
+    println("word count of hello.txt")
+    rdd.flatMap(x=>x.split(" ")).map(x=>(x,1)).reduceByKey(_+_).collect()
 
   }
 }
